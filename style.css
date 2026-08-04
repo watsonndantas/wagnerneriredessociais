@@ -325,8 +325,8 @@ img { max-width: 100%; display: block; }
 }
 
 .specialist__photo-frame {
-  width: 96px;
-  height: 96px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   background: var(--gradient);
   padding: 3px;
