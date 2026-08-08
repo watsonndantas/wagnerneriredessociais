@@ -405,6 +405,12 @@ img { max-width: 100%; display: block; }
 
 .footer__col p { margin-bottom: 8px; font-size: 0.9rem; }
 
+.footer__affiliation {
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
 .footer__col a {
   color: var(--text-muted);
   font-size: 0.9rem;
