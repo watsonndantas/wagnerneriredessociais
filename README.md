@@ -1,8 +1,8 @@
 # Wagner Neri — Recuperação de Contas de Redes Sociais
 
 Landing page de alta conversão para captação de clientes com contas de redes
-sociais (Instagram, Facebook, TikTok) suspensas, banidas ou hackeadas, com
-foco em atendimento via WhatsApp.
+sociais (Instagram, WhatsApp, Facebook, TikTok) suspensas, banidas ou hackeadas,
+com foco em atendimento via WhatsApp.
 
 ## Stack
 
@@ -22,7 +22,11 @@ foco em atendimento via WhatsApp.
     ├── index.html
     ├── style.css
     ├── script.js
-    └── img/            # Foto do especialista (wagner-neri.jpg)
+    ├── robots.txt
+    ├── sitemap.xml
+    └── img/
+        ├── wagner-neri.jpg
+        └── acesso-recuperado.png   # OG / compartilhamento Ads
 ```
 
 ## Como rodar localmente
@@ -55,25 +59,33 @@ Depois do primeiro deploy, em **Project Settings → Domains**, adicione
 `wagnerneriredessociais.com.br` e siga as instruções de DNS exibidas pela
 Vercel (registro A ou CNAME, conforme o seu provedor de domínio).
 
-## Rastreamento de leads
+## Rastreamento de leads e tráfego pago
 
 Todo clique nos botões de WhatsApp passa por `/ir/whatsapp?origem=<local>`,
 que:
 
-1. Grava um log estruturado (`lead_click origem=... ip=... user_agent=...`).
-   Na Vercel, esses logs aparecem em **Project → Logs** (Runtime Logs).
-   > Funções serverless não têm disco persistente, por isso os leads não
-   > ficam em um banco de dados local — os logs da Vercel são a fonte de
-   > registro dos cliques no backend.
-2. Redireciona (302) para o WhatsApp com a mensagem correta para o contexto
-   do botão clicado.
+1. Grava um log mínimo (`lead_click origem=... attrs=...`) sem IP/UA completos.
+   Na Vercel: **Project → Logs** (Runtime Logs).
+2. Redireciona (302) **somente** para `https://wa.me/<número fixo>` (allowlist
+   de host/telefone — sem open redirect).
+3. Anexa à mensagem um sufixo curto com UTMs/clids sanitizados, quando presentes.
 
-A fonte principal de métricas de conversão, porém, são o **Google Analytics
-4** e o **Meta Pixel** (evento `click_whatsapp` / `Contact`), configurados
-em `window.SITE_CONFIG` no `<head>` do `public/index.html` — eles funcionam
-independentemente do backend e têm painéis próprios para acompanhar os
-cliques ao longo do tempo.
+No cliente (`window.SITE_CONFIG` em `public/index.html`), no clique (antes do
+redirect):
 
-Se no futuro for necessário um histórico de leads pesquisável (não apenas
-logs), a Vercel oferece integrações de armazenamento (Postgres, KV) que
-podem ser conectadas à função sem mudar o restante do site.
+| Ferramenta | IDs | Eventos no clique WhatsApp |
+|---|---|---|
+| GA4 | `G-R6XH5W3PJZ` | `click_whatsapp`, `generate_lead` |
+| Meta Pixel | `207714888442557` | `Contact`, `Lead` |
+| Google Ads | `GOOGLE_ADS_ID` + `GOOGLE_ADS_CONVERSION_LABEL` | `conversion` (só com rótulo) |
+
+**O que o cliente precisa fornecer para Ads:** o ID `AW-…` e o rótulo da
+conversão de clique no WhatsApp. Enquanto o ID for placeholder
+(`AW-XXXXXXXXXX`), use os eventos GA4 importados no painel do Ads
+(vinculação GA4 ↔ Google Ads).
+
+UTMs e `gclid`/`gbraid`/`wbraid`/`fbclid` são capturados em `sessionStorage`,
+enviados aos eventos e passados ao backend de forma sanitizada.
+
+SEO: meta/OG/Twitter, `robots.txt`, `sitemap.xml` e JSON-LD
+(Person + ProfessionalService — sem claim de OAB/Attorney).

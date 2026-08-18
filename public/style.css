@@ -309,6 +309,40 @@ img { max-width: 100%; display: block; }
 }
 
 /* =====================================================
+   ESTRATÉGIA — Opção B (processo)
+   ===================================================== */
+.strategy {
+  padding: 64px 0;
+  background:
+    radial-gradient(circle at 80% 20%, rgba(55, 224, 255, 0.06) 0%, transparent 45%),
+    var(--bg);
+}
+
+.strategy__inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.strategy__title {
+  font-size: clamp(1.35rem, 2.6vw, 1.75rem);
+  margin-bottom: 18px;
+}
+
+.strategy__text {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.strategy__platforms {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 28px;
+  padding-left: 14px;
+  border-left: 2px solid var(--green);
+}
+
+/* =====================================================
    ESPECIALISTA — barra compacta
    ===================================================== */
 .specialist { padding: 64px 0; }
@@ -365,8 +399,9 @@ img { max-width: 100%; display: block; }
 .specialist__role {
   color: var(--green);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 10px;
+  line-height: 1.35;
 }
 
 .specialist__text {
@@ -539,6 +574,7 @@ img { max-width: 100%; display: block; }
 @media (max-width: 520px) {
   .header__cta { display: none; }
   .hero { padding: 40px 0; }
+  .strategy { padding: 48px 0; }
   .specialist { padding: 48px 0; }
   .specialist__inner { padding: 24px; }
   .whatsapp-float { width: 56px; height: 56px; bottom: 20px; right: 20px; }

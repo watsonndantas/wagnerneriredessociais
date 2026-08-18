@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (terminalOutput) {
     const LINES = [
       '$ verificar --conta',
-      'Plataforma: Instagram / Facebook / TikTok',
+      'Plataforma: Instagram / WhatsApp / Facebook / TikTok',
       'Status: SUSPENSA ⚠',
       'Diagnóstico: bloqueio sem contraditório',
       'Ação recomendada: medida judicial (liminar)',
@@ -141,7 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* -----------------------------------------------------
      4) SCROLL REVEAL — entrada sutil das seções
      ----------------------------------------------------- */
-  const revealTargets = document.querySelectorAll('.hero__content, .hero__terminal, .tracker__step, .specialist__inner');
+  const revealTargets = document.querySelectorAll(
+    '.hero__content, .hero__terminal, .tracker__step, .strategy__inner, .specialist__inner'
+  );
   revealTargets.forEach((el) => el.classList.add('reveal'));
 
   if ('IntersectionObserver' in window && !prefersReducedMotion) {
@@ -162,28 +164,166 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -----------------------------------------------------
-     5) RASTREAMENTO DE CONVERSÃO — GA4 + Meta Pixel
-     Disparado no clique, antes de o link seguir para o
-     backend (/ir/whatsapp), que registra o lead e redireciona.
+     5) ATRIBUIÇÃO DE CAMPANHA (UTM + clids) — tráfego pago
+     ----------------------------------------------------- */
+  const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+  const CLICK_ID_KEYS = ['gclid', 'gbraid', 'wbraid', 'fbclid'];
+  const ATTR_KEYS = UTM_KEYS.concat(CLICK_ID_KEYS);
+  const ATTR_STORAGE_KEY = 'wn_utm_params';
+  const MAX_ATTR_VALUE_LEN = 80;
+
+  const sanitizeAttrValue = (value) => {
+    if (value == null) return '';
+    const asString = String(value).replace(/[\u0000-\u001F\u007F]/g, '').trim();
+    if (!asString) return '';
+    return asString.length > MAX_ATTR_VALUE_LEN
+      ? asString.slice(0, MAX_ATTR_VALUE_LEN)
+      : asString;
+  };
+
+  const sanitizeAttrObject = (raw) => {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+    const clean = {};
+    ATTR_KEYS.forEach((key) => {
+      if (!Object.prototype.hasOwnProperty.call(raw, key)) return;
+      const value = sanitizeAttrValue(raw[key]);
+      if (value) clean[key] = value;
+    });
+    return clean;
+  };
+
+  const readAttrFromUrl = () => {
+    const params = new URLSearchParams(window.location.search);
+    const attr = {};
+    ATTR_KEYS.forEach((key) => {
+      const value = sanitizeAttrValue(params.get(key));
+      if (value) attr[key] = value;
+    });
+    return attr;
+  };
+
+  const readAttrFromStorage = () => {
+    try {
+      const stored = sessionStorage.getItem(ATTR_STORAGE_KEY);
+      if (!stored) return {};
+      return sanitizeAttrObject(JSON.parse(stored));
+    } catch (e) {
+      return {};
+    }
+  };
+
+  let utmParams = {};
+  try {
+    const fromUrl = readAttrFromUrl();
+    if (Object.keys(fromUrl).length) {
+      utmParams = Object.assign({}, readAttrFromStorage(), fromUrl);
+      sessionStorage.setItem(ATTR_STORAGE_KEY, JSON.stringify(utmParams));
+    } else {
+      utmParams = readAttrFromStorage();
+    }
+  } catch (e) {
+    // sessionStorage indisponível — segue sem atribuição
+  }
+
+  const attributionForEvents = () => Object.assign({}, utmParams);
+
+  /* DKI leve: só troca o badge por rótulos fixos (nunca injeta o termo cru) */
+  const KEYWORD_BADGES = [
+    { match: /whatsapp/i, label: 'Especialista em WhatsApp banido' },
+    { match: /facebook/i, label: 'Especialista em recuperação de Facebook' },
+    { match: /instagram/i, label: 'Especialista em recuperação de Instagram' },
+    { match: /tiktok/i, label: 'Especialista em recuperação de TikTok' },
+    { match: /banid|banimento/i, label: 'Especialista em conta banida' },
+    { match: /suspens/i, label: 'Especialista em conta suspensa' },
+    { match: /hack|invad|roubad|clonad/i, label: 'Especialista em conta hackeada' },
+  ];
+
+  const adKeyword = (() => {
+    const params = new URLSearchParams(window.location.search);
+    return sanitizeAttrValue(
+      params.get('utm_term') || params.get('kw') || utmParams.utm_term || ''
+    );
+  })();
+
+  if (adKeyword) {
+    const badgeEl = document.getElementById('hero-badge');
+    const matchedBadge = KEYWORD_BADGES.find((entry) => entry.match.test(adKeyword));
+    if (badgeEl && matchedBadge) {
+      badgeEl.textContent = matchedBadge.label;
+    }
+  }
+
+  /* -----------------------------------------------------
+     6) RASTREAMENTO DE CONVERSÃO — GA4 + Meta + Google Ads
+     Dispara no clique, ANTES do redirect /ir/whatsapp.
+     Atribuição sanitizada vai na query do backend (sufixo
+     da mensagem WhatsApp é montado no servidor).
      ----------------------------------------------------- */
   const siteConfig = window.SITE_CONFIG || {};
   const isPlaceholder = (value, placeholder) => !value || value === placeholder;
 
   const gaReady = !isPlaceholder(siteConfig.GA_MEASUREMENT_ID, 'G-XXXXXXXXXX');
   const pixelReady = !isPlaceholder(siteConfig.META_PIXEL_ID, '0000000000000000');
+  const adsReady = !isPlaceholder(siteConfig.GOOGLE_ADS_ID, 'AW-XXXXXXXXXX');
+  const adsConversionLabel = (siteConfig.GOOGLE_ADS_CONVERSION_LABEL || '').trim();
+
+  if (!adsReady) {
+    console.info(
+      '[Google Ads] GOOGLE_ADS_ID ainda é placeholder (AW-XXXXXXXXXX). ' +
+      'Cole o ID real em SITE_CONFIG. Enquanto isso, use click_whatsapp / generate_lead no GA4.'
+    );
+  } else if (!adsConversionLabel) {
+    console.info(
+      '[Google Ads] Remarketing ativo. GOOGLE_ADS_CONVERSION_LABEL vazio — ' +
+      'cole o rótulo ou importe generate_lead / click_whatsapp do GA4.'
+    );
+  }
 
   document.querySelectorAll('a[href*="/ir/whatsapp"]').forEach((link) => {
+    if (!link.dataset.baseHref) {
+      link.dataset.baseHref = link.getAttribute('href') || '';
+    }
+
     link.addEventListener('click', () => {
-      const url = new URL(link.href, window.location.origin);
+      const url = new URL(link.dataset.baseHref, window.location.origin);
       const origem = url.searchParams.get('origem') || link.id || 'desconhecida';
-      console.log('[Conversão] Clique em CTA do WhatsApp:', origem);
+      const attr = attributionForEvents();
+      const ctaLabel = link.id || origem;
+
+      // Anexa UTMs/clids sanitizados à rota do backend (não altera host/destino)
+      ATTR_KEYS.forEach((key) => {
+        if (attr[key]) url.searchParams.set(key, attr[key]);
+      });
+      link.href = url.pathname + url.search;
+
+      console.log('[Conversão] Clique em CTA do WhatsApp:', ctaLabel);
 
       if (gaReady && typeof window.gtag === 'function') {
-        window.gtag('event', 'click_whatsapp', { event_category: 'conversao', event_label: origem });
+        window.gtag('event', 'click_whatsapp', {
+          event_category: 'conversao',
+          event_label: ctaLabel,
+          ...attr,
+        });
+        window.gtag('event', 'generate_lead', {
+          event_category: 'conversao',
+          event_label: ctaLabel,
+          currency: 'BRL',
+          value: 0,
+          ...attr,
+        });
+      }
+
+      if (adsReady && adsConversionLabel && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          send_to: `${siteConfig.GOOGLE_ADS_ID}/${adsConversionLabel}`,
+          event_category: 'conversao',
+          event_label: ctaLabel,
+        });
       }
 
       if (pixelReady && typeof window.fbq === 'function') {
-        window.fbq('track', 'Contact', { content_name: origem });
+        window.fbq('track', 'Contact', { content_name: ctaLabel, ...attr });
+        window.fbq('track', 'Lead', { content_name: ctaLabel, ...attr });
       }
     });
   });
