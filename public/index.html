@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- deploy: 2026-08-18-b -->
-  <meta name="x-deploy" content="2026-08-18-b" />
+  <!-- deploy: 2026-08-18-c -->
+  <meta name="x-deploy" content="2026-08-18-c" />
   <!-- Segurança complementar (headers HTTP principais vêm do vercel.json) -->
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
@@ -29,7 +29,7 @@
   <meta name="twitter:image:alt" content="Acesso recuperado — recuperação de contas de redes sociais" />
 
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="style.css?v=6" />
+  <link rel="stylesheet" href="style.css?v=7" />
 
   <!-- ===== Dados estruturados (SEO) — Person / ProfessionalService (sem Attorney/OAB) ===== -->
   <script type="application/ld+json">
@@ -243,19 +243,15 @@
     <section class="hero">
       <div class="container hero__inner">
 
-        <div class="hero__terminal">
-          <div class="terminal">
-            <div class="terminal__bar">
-              <span class="terminal__dot terminal__dot--red"></span>
-              <span class="terminal__dot terminal__dot--yellow"></span>
-              <span class="terminal__dot terminal__dot--green"></span>
-              <span class="terminal__title">diagnostico.sh</span>
-            </div>
-            <div class="terminal__body">
-              <div class="terminal__output" id="terminal-output" aria-hidden="true"></div>
-              <span class="terminal__cursor">█</span>
-            </div>
-          </div>
+        <div class="hero__visual">
+          <img
+            src="img/acesso-recuperado.png"
+            alt="Acesso recuperado — sua rede social de volta: conta restaurada com segurança e agilidade"
+            width="682"
+            height="1024"
+            decoding="async"
+            fetchpriority="high"
+          />
         </div>
 
         <div class="hero__content">
@@ -325,16 +321,20 @@
             Quero analisar meu caso
           </a>
         </div>
-        <figure class="strategy__visual">
-          <img
-            src="img/acesso-recuperado.png"
-            alt="Acesso recuperado — sua rede social de volta: conta restaurada com segurança e agilidade"
-            width="1200"
-            height="675"
-            loading="lazy"
-            decoding="async"
-          />
-        </figure>
+        <div class="strategy__terminal">
+          <div class="terminal">
+            <div class="terminal__bar">
+              <span class="terminal__dot terminal__dot--red"></span>
+              <span class="terminal__dot terminal__dot--yellow"></span>
+              <span class="terminal__dot terminal__dot--green"></span>
+              <span class="terminal__title">diagnostico.sh</span>
+            </div>
+            <div class="terminal__body">
+              <div class="terminal__output" id="terminal-output" aria-hidden="true"></div>
+              <span class="terminal__cursor">█</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -394,6 +394,6 @@
     </svg>
   </a>
 
-  <script src="script.js?v=6"></script>
+  <script src="script.js?v=7"></script>
 </body>
 </html>
