@@ -177,6 +177,12 @@ img { max-width: 100%; display: block; }
   color: var(--cyan);
 }
 
+.hero__text {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+}
+
 .hero__note {
   margin-top: 12px;
   font-size: 0.85rem;
@@ -246,7 +252,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* =====================================================
-   ESTRATÉGIA — Opção B (processo)
+   ESTRATÉGIA — Opção B (processo) + imagem lado a lado
    ===================================================== */
 .strategy {
   padding: 64px 0;
@@ -256,8 +262,10 @@ img { max-width: 100%; display: block; }
 }
 
 .strategy__inner {
-  max-width: 720px;
-  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
 }
 
 .strategy__title {
@@ -269,6 +277,9 @@ img { max-width: 100%; display: block; }
   font-size: 1.02rem;
   line-height: 1.7;
   margin-bottom: 16px;
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 
 .strategy__platforms {
@@ -277,6 +288,22 @@ img { max-width: 100%; display: block; }
   margin-bottom: 28px;
   padding-left: 14px;
   border-left: 2px solid var(--green);
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
+}
+
+.strategy__visual {
+  margin: 0;
+}
+
+.strategy__visual img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  background: var(--bg-panel);
 }
 
 /* =====================================================
@@ -400,6 +427,12 @@ img { max-width: 100%; display: block; }
   margin: 0 auto 8px;
 }
 
+.footer__disclaimer {
+  text-align: justify;
+  text-align-last: center;
+  hyphens: auto;
+}
+
 /* ===== Modal Política de Privacidade ===== */
 .modal {
   position: fixed;
@@ -442,6 +475,12 @@ img { max-width: 100%; display: block; }
   font-size: 1.6rem;
   cursor: pointer;
   line-height: 1;
+}
+
+.modal__content p {
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 
 .modal__close:hover { color: var(--text); }
@@ -493,8 +532,24 @@ img { max-width: 100%; display: block; }
 @media (max-width: 900px) {
   .hero__inner { grid-template-columns: 1fr; }
 
+  .strategy__inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .strategy__visual { order: 2; }
+  .strategy__copy { order: 1; }
+
   .specialist__inner {
     grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .specialist__info {
+    width: 100%;
+  }
+
+  .specialist__info h2 {
     text-align: center;
   }
 
