@@ -246,69 +246,6 @@ img { max-width: 100%; display: block; }
 }
 
 /* =====================================================
-   TRACKER — como funciona (compacto, uma linha)
-   ===================================================== */
-.tracker-section {
-  padding: 56px 0;
-  background: var(--bg-alt);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.tracker-section__title {
-  text-align: center;
-  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
-  margin-bottom: 40px;
-}
-
-.tracker {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 0;
-}
-
-.tracker__step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  max-width: 220px;
-}
-
-.tracker__icon {
-  font-size: 1.6rem;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  margin-bottom: 12px;
-}
-
-.tracker__label {
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.tracker__caption {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.tracker__line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-  margin-top: 28px;
-  min-width: 32px;
-  max-width: 96px;
-}
-
-/* =====================================================
    ESTRATÉGIA — Opção B (processo)
    ===================================================== */
 .strategy {
@@ -555,9 +492,6 @@ img { max-width: 100%; display: block; }
 /* ===== Responsivo ===== */
 @media (max-width: 900px) {
   .hero__inner { grid-template-columns: 1fr; }
-
-  .tracker { flex-direction: column; align-items: center; gap: 24px; }
-  .tracker__line { display: none; }
 
   .specialist__inner {
     grid-template-columns: 1fr;
