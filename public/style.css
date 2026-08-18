@@ -227,6 +227,9 @@ img { max-width: 100%; display: block; height: auto; }
   color: var(--text);
   line-height: 1.55;
   margin-bottom: 14px;
+  text-align: justify;
+  text-align-last: left;
+  hyphens: auto;
 }
 
 .hero__tagline {
