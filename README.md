@@ -25,8 +25,8 @@ com foco em atendimento via WhatsApp.
     ├── robots.txt
     ├── sitemap.xml
     └── img/
-        ├── wagner-neri.jpg
-        └── acesso-recuperado.png   # OG / compartilhamento Ads
+        ├── wagner-neri.jpg / .webp
+        └── acesso-recuperado.jpg / .webp   # OG / LCP / Ads
 ```
 
 ## Como rodar localmente

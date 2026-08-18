@@ -29,7 +29,16 @@ WHATSAPP_NUMBER = "5586988640341"
 ALLOWED_WHATSAPP_HOSTS = frozenset({"wa.me", "api.whatsapp.com", "www.whatsapp.com"})
 WHATSAPP_BASE = f"https://wa.me/{WHATSAPP_NUMBER}"
 
-ALLOWED_ORIGENS = frozenset({"header", "hero", "estrategia", "especialista", "float"})
+ALLOWED_ORIGENS = frozenset({
+    "header",
+    "hero",
+    "estrategia",
+    "especialista",
+    "float",
+    "plano_diagnostico",
+    "plano_atuacao",
+    "plano_acompanhamento",
+})
 
 ATTR_KEYS = (
     "utm_source",
@@ -58,6 +67,18 @@ MESSAGES = {
     ),
     "especialista": "Olá! Gostaria de avaliar meu caso de recuperação de conta agora.",
     "float": "Olá! Preciso de ajuda para recuperar minha conta suspensa em uma rede social.",
+    "plano_diagnostico": (
+        "Olá! Quero um diagnóstico do meu caso de conta banida/suspensa "
+        "(Instagram, WhatsApp, Facebook ou TikTok)."
+    ),
+    "plano_atuacao": (
+        "Olá! Tenho interesse na atuação estratégica para recuperar minha conta "
+        "com Direito Digital / liminar, se cabível."
+    ),
+    "plano_acompanhamento": (
+        "Olá! Quero saber sobre o acompanhamento completo do meu caso de "
+        "recuperação de conta em rede social."
+    ),
 }
 DEFAULT_MESSAGE = "Olá! Preciso de ajuda para recuperar minha conta de rede social."
 

@@ -10,7 +10,7 @@
   --bg-panel: #14181d;
   --border: #232830;
   --text: #eef1f4;
-  --text-muted: #8b95a1;
+  --text-muted: #a8b2bd;
 
   --green: #00e08f;
   --cyan: #37e0ff;
@@ -25,6 +25,7 @@
 
   --radius: 14px;
   --max-width: 1080px;
+  --focus-ring: 0 0 0 3px rgba(55, 224, 255, 0.55);
 }
 
 * { box-sizing: border-box; }
@@ -50,7 +51,7 @@ p { margin: 0 0 16px; color: var(--text-muted); }
 
 a { color: inherit; text-decoration: none; }
 
-img { max-width: 100%; display: block; }
+img { max-width: 100%; display: block; height: auto; }
 
 .container {
   max-width: var(--max-width);
@@ -63,6 +64,39 @@ img { max-width: 100%; display: block; }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ===== A11y: skip + focus ===== */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 200;
+  padding: 10px 16px;
+  background: var(--cyan);
+  color: #0b0d10;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 12px;
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+.btn:focus-visible,
+.cta-stack__btn:focus-visible,
+.whatsapp-float:focus-visible,
+.modal__close:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 /* ===== Badge ===== */
@@ -91,7 +125,7 @@ img { max-width: 100%; display: block; }
   font-size: 1rem;
   cursor: pointer;
   border: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   white-space: nowrap;
 }
 
@@ -146,7 +180,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* =====================================================
-   HERO — terminal de diagnóstico + proposta
+   HERO — proposta + visual dominante
    ===================================================== */
 .hero {
   padding: 56px 0;
@@ -170,19 +204,29 @@ img { max-width: 100%; display: block; }
 
 .hero__visual {
   margin: 0;
+  aspect-ratio: 560 / 840;
+  max-width: 420px;
+  width: 100%;
+  margin-inline: auto;
 }
 
+.hero__visual picture,
 .hero__visual img {
   display: block;
   width: 100%;
-  max-width: 420px;
   height: auto;
-  margin: 0 auto;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
   background: var(--bg-panel);
   object-fit: contain;
+}
+
+.hero__lead {
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.55;
+  margin-bottom: 14px;
 }
 
 .hero__tagline {
@@ -201,8 +245,59 @@ img { max-width: 100%; display: block; }
 }
 
 .hero__note {
-  margin-top: 12px;
+  margin-top: 14px;
   font-size: 0.85rem;
+}
+
+/* ----- CTA stack (link-in-bio pattern, dark/terminal) ----- */
+.cta-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 0 4px;
+  max-width: 420px;
+}
+
+.cta-stack__btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(20, 24, 29, 0.92);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+  white-space: normal;
+  text-align: left;
+}
+
+.cta-stack__btn:hover {
+  border-color: var(--green);
+  transform: translateY(-2px);
+}
+
+.cta-stack__btn--whatsapp {
+  background: linear-gradient(90deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.3);
+  justify-content: center;
+  text-align: center;
+}
+
+.cta-stack__btn--whatsapp:hover {
+  border-color: transparent;
+  box-shadow: 0 12px 28px rgba(37, 211, 102, 0.45);
+}
+
+.cta-stack__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  opacity: 0.95;
 }
 
 /* ----- Terminal ----- */
@@ -269,7 +364,123 @@ img { max-width: 100%; display: block; }
 }
 
 /* =====================================================
-   ESTRATÉGIA — Opção B (processo) + imagem lado a lado
+   OFERTAS — 3 cards (clareza de escopo)
+   ===================================================== */
+.offers {
+  padding: 64px 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(0, 224, 143, 0.06) 0%, transparent 40%),
+    var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.offers__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 36px;
+}
+
+.offers__header h2 {
+  font-size: clamp(1.4rem, 2.8vw, 1.85rem);
+}
+
+.offers__intro {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.offers__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.offer-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 22px 24px;
+}
+
+.offer-card--featured {
+  border-color: rgba(0, 224, 143, 0.45);
+  box-shadow: 0 0 0 1px rgba(0, 224, 143, 0.15), 0 18px 40px rgba(0, 0, 0, 0.28);
+  transform: translateY(-6px);
+}
+
+.offer-card__badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #06261a;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.offer-card__label {
+  margin: 0 0 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.offer-card__title {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.offer-card__list {
+  margin: 0 0 24px;
+  padding: 0;
+  list-style: none;
+  flex: 1;
+}
+
+.offer-card__list li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 10px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.offer-card__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--green);
+}
+
+.offer-card__cta {
+  width: 100%;
+  white-space: normal;
+  text-align: center;
+}
+
+/* =====================================================
+   ESTRATÉGIA — Opção B (processo) + terminal
    ===================================================== */
 .strategy {
   padding: 64px 0;
@@ -338,8 +549,10 @@ img { max-width: 100%; display: block; }
   background: var(--gradient);
   padding: 3px;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
+.specialist__photo-frame picture,
 .specialist__photo-frame img {
   width: 100%;
   height: 100%;
@@ -430,8 +643,8 @@ img { max-width: 100%; display: block; }
 .footer__bottom { padding-top: 20px; text-align: center; }
 
 .footer__bottom p {
-  font-size: 0.78rem;
-  color: #6b7280;
+  font-size: 0.8rem;
+  color: #9aa3ad;
   max-width: 680px;
   margin: 0 auto 8px;
 }
@@ -484,6 +697,8 @@ img { max-width: 100%; display: block; }
   font-size: 1.6rem;
   cursor: pointer;
   line-height: 1;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .modal__content p {
@@ -535,11 +750,29 @@ img { max-width: 100%; display: block; }
   html { scroll-behavior: auto; }
   .terminal__cursor { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .cta-stack__btn,
+  .btn { transition: none; }
 }
 
 /* ===== Responsivo ===== */
 @media (max-width: 900px) {
-  .hero__inner { grid-template-columns: 1fr; }
+  .hero__inner { grid-template-columns: 1fr; gap: 28px; }
+
+  .hero__visual {
+    max-width: 280px;
+  }
+
+  .hero__text { display: none; }
+
+  .cta-stack { max-width: none; }
+
+  .offers__grid {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .offer-card--featured { transform: none; }
 
   .strategy__inner {
     grid-template-columns: 1fr;
@@ -554,13 +787,9 @@ img { max-width: 100%; display: block; }
     justify-items: center;
   }
 
-  .specialist__info {
-    width: 100%;
-  }
+  .specialist__info { width: 100%; }
 
-  .specialist__info h2 {
-    text-align: center;
-  }
+  .specialist__info h2 { text-align: center; }
 
   .specialist__photo-frame { margin: 0 auto; }
 
@@ -571,9 +800,11 @@ img { max-width: 100%; display: block; }
 
 @media (max-width: 520px) {
   .header__cta { display: none; }
-  .hero { padding: 40px 0; }
+  .hero { padding: 32px 0 40px; }
+  .hero__title { font-size: 1.65rem; }
   .strategy { padding: 48px 0; }
   .specialist { padding: 48px 0; }
+  .offers { padding: 48px 0; }
   .specialist__inner { padding: 24px; }
   .whatsapp-float { width: 56px; height: 56px; bottom: 20px; right: 20px; }
 }

@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
      4) SCROLL REVEAL — entrada sutil das seções
      ----------------------------------------------------- */
   const revealTargets = document.querySelectorAll(
-    '.hero__content, .hero__visual, .strategy__inner, .specialist__inner'
+    '.hero__content, .hero__visual, .strategy__inner, .specialist__inner, .offers__grid'
   );
   revealTargets.forEach((el) => el.classList.add('reveal'));
 

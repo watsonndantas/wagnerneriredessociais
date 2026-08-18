@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- deploy: 2026-08-18-c -->
-  <meta name="x-deploy" content="2026-08-18-c" />
+  <!-- deploy: 2026-08-18-d -->
+  <meta name="x-deploy" content="2026-08-18-d" />
   <!-- Segurança complementar (headers HTTP principais vêm do vercel.json) -->
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
@@ -19,17 +19,18 @@
   <meta property="og:url" content="https://wagnerneriredessociais.com.br/" />
   <meta property="og:title" content="Recuperar Conta Instagram, WhatsApp Banido e Facebook | Wagner Neri" />
   <meta property="og:description" content="Conta bloqueada, hackeada ou banida? Especialista em Direito Digital e recuperação de Instagram, WhatsApp, Facebook e TikTok. Fale agora no WhatsApp." />
-  <meta property="og:image" content="https://wagnerneriredessociais.com.br/img/acesso-recuperado.png" />
+  <meta property="og:image" content="https://wagnerneriredessociais.com.br/img/acesso-recuperado.jpg" />
   <meta property="og:image:alt" content="Acesso recuperado — recuperação de contas de redes sociais" />
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Recuperar Conta Instagram, WhatsApp Banido e Facebook | Wagner Neri" />
   <meta name="twitter:description" content="Instagram, WhatsApp, Facebook ou TikTok banidos? Especialista em Direito Digital. Atendimento em todo o Brasil." />
-  <meta name="twitter:image" content="https://wagnerneriredessociais.com.br/img/acesso-recuperado.png" />
+  <meta name="twitter:image" content="https://wagnerneriredessociais.com.br/img/acesso-recuperado.jpg" />
   <meta name="twitter:image:alt" content="Acesso recuperado — recuperação de contas de redes sociais" />
 
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="style.css?v=7" />
+  <link rel="preload" as="image" href="img/acesso-recuperado.webp" type="image/webp" fetchpriority="high" />
+  <link rel="stylesheet" href="style.css?v=8" />
 
   <!-- ===== Dados estruturados (SEO) — Person / ProfessionalService (sem Attorney/OAB) ===== -->
   <script type="application/ld+json">
@@ -53,7 +54,8 @@
     },
     "worksFor": {
       "@type": "Organization",
-      "name": "Escritório do Adv. Dr. Ricardo Nery"
+      "name": "Escritório do Adv. Dr. Ricardo Nery",
+      "url": "https://ricardoneryadvocaciabr.com.br/"
     },
     "knowsAbout": [
       "Direito Digital",
@@ -74,7 +76,7 @@
     "@id": "https://wagnerneriredessociais.com.br/#service",
     "name": "Wagner Neri — Recuperação de Contas de Redes Sociais",
     "url": "https://wagnerneriredessociais.com.br/",
-    "image": "https://wagnerneriredessociais.com.br/img/acesso-recuperado.png",
+    "image": "https://wagnerneriredessociais.com.br/img/acesso-recuperado.jpg",
     "telephone": "+5586988640341",
     "email": "wagnerneriadvocacia@gmail.com",
     "priceRange": "$$",
@@ -118,7 +120,7 @@
         "about": { "@id": "https://wagnerneriredessociais.com.br/#person" },
         "primaryImageOfPage": {
           "@type": "ImageObject",
-          "url": "https://wagnerneriredessociais.com.br/img/acesso-recuperado.png"
+          "url": "https://wagnerneriredessociais.com.br/img/acesso-recuperado.jpg"
         },
         "inLanguage": "pt-BR"
       }
@@ -225,6 +227,8 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#conteudo-principal">Ir para o conteúdo</a>
+
   <noscript>
     <img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=207714888442557&ev=PageView&noscript=1" alt="" />
@@ -237,26 +241,33 @@
     </div>
   </header>
 
-  <main>
+  <main id="conteudo-principal">
 
-    <!-- ===== HERO — Opção A (urgência) + terminal ===== -->
+    <!-- ===== HERO — Opção A (urgência) + visual dominante ===== -->
     <section class="hero">
       <div class="container hero__inner">
 
         <div class="hero__visual">
-          <img
-            src="img/acesso-recuperado.png"
-            alt="Acesso recuperado — sua rede social de volta: conta restaurada com segurança e agilidade"
-            width="682"
-            height="1024"
-            decoding="async"
-            fetchpriority="high"
-          />
+          <picture>
+            <source srcset="img/acesso-recuperado.webp" type="image/webp" />
+            <img
+              src="img/acesso-recuperado.jpg"
+              alt="Acesso recuperado — sua rede social de volta: conta restaurada com segurança e agilidade"
+              width="560"
+              height="840"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
 
         <div class="hero__content">
           <span class="badge" id="hero-badge">Instagram · WhatsApp · Facebook · TikTok</span>
           <h1 class="hero__title">Recupere sua conta. <span class="gradient-text">Derrube o bloqueio.</span></h1>
+          <p class="hero__lead">
+            Conta bloqueada, hackeada ou banida? Direito Digital e liminares de urgência
+            para buscar o restabelecimento do seu Instagram, WhatsApp, Facebook ou TikTok.
+          </p>
           <p class="hero__text">
             Sua rede social foi bloqueada, hackeada ou banida injustamente?
             Algoritmos e decisões arbitrárias das grandes plataformas não podem destruir
@@ -266,9 +277,20 @@
             Exija o que é seu por direito — recupere sua conta agora.
           </p>
           <p class="hero__tagline">Wagner Neri · Especialista em Direito Digital</p>
-          <a href="/ir/whatsapp?origem=hero" target="_blank" rel="noopener" class="btn btn--whatsapp btn--lg" id="hero-cta">
-            💬 Recuperar minha conta no WhatsApp
-          </a>
+
+          <nav class="cta-stack" aria-label="Contatos rápidos">
+            <a href="/ir/whatsapp?origem=hero" target="_blank" rel="noopener" class="cta-stack__btn cta-stack__btn--whatsapp" id="hero-cta">
+              <span class="cta-stack__icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" width="20" height="20" fill="currentColor"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.34.652 4.527 1.785 6.393L4 29l7.828-1.749A11.94 11.94 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm0 21.6a9.55 9.55 0 0 1-4.87-1.334l-.35-.207-4.64 1.037 1.06-4.522-.228-.365A9.56 9.56 0 1 1 25.56 15c0 5.294-4.266 9.6-9.559 9.6zm5.242-7.14c-.287-.144-1.698-.838-1.961-.934-.263-.096-.454-.144-.646.144-.191.287-.742.934-.91 1.126-.168.191-.335.215-.622.072-.287-.144-1.212-.447-2.309-1.427-.853-.762-1.43-1.703-1.598-1.99-.168-.287-.018-.442.126-.585.129-.129.287-.335.43-.502.144-.168.191-.287.287-.478.096-.191.048-.36-.024-.503-.072-.144-.646-1.559-.885-2.135-.233-.56-.47-.484-.646-.493l-.55-.01c-.191 0-.502.072-.766.36-.263.287-1.003.98-1.003 2.39s1.027 2.774 1.17 2.966c.144.191 2.02 3.084 4.892 4.325.684.295 1.217.471 1.633.603.686.218 1.31.187 1.804.113.55-.082 1.698-.694 1.938-1.365.24-.67.24-1.245.168-1.365-.072-.12-.263-.191-.55-.335z"/></svg>
+              </span>
+              <span>WhatsApp — recuperar minha conta</span>
+            </a>
+            <a href="https://ricardoneryadvocaciabr.com.br/" target="_blank" rel="noopener noreferrer" class="cta-stack__btn" id="cta-escritorio">
+              <span class="cta-stack__icon" aria-hidden="true">↗</span>
+              <span>Escritório Dr. Ricardo Nery</span>
+            </a>
+          </nav>
+
           <p class="hero__note">Resposta rápida · Atendimento remoto em todo o Brasil</p>
         </div>
 
@@ -279,7 +301,18 @@
     <section class="specialist" id="especialista">
       <div class="container specialist__inner">
         <div class="specialist__photo-frame">
-          <img src="img/wagner-neri.jpg" alt="Wagner Neri, especialista em Direito Digital e recuperação de contas" loading="lazy" onerror="this.closest('.specialist__photo-frame').classList.add('specialist__photo-frame--empty'); this.remove();" />
+          <picture>
+            <source srcset="img/wagner-neri.webp" type="image/webp" />
+            <img
+              src="img/wagner-neri.jpg"
+              alt="Wagner Neri, especialista em Direito Digital e recuperação de contas"
+              width="256"
+              height="256"
+              loading="lazy"
+              decoding="async"
+              onerror="this.closest('.specialist__photo-frame').classList.add('specialist__photo-frame--empty'); this.remove();"
+            />
+          </picture>
         </div>
         <div class="specialist__info">
           <h2>Wagner Neri</h2>
@@ -291,13 +324,70 @@
             escritório de advocacia do Adv. Dr. Ricardo Nery.
           </p>
           <div class="specialist__contact">
-            <a href="tel:+5586988640341">📞 (86) 9 8864-0341</a>
-            <a href="mailto:wagnerneriadvocacia@gmail.com">✉️ wagnerneriadvocacia@gmail.com</a>
+            <a href="tel:+5586988640341">Telefone: (86) 9 8864-0341</a>
+            <a href="mailto:wagnerneriadvocacia@gmail.com">E-mail: wagnerneriadvocacia@gmail.com</a>
           </div>
         </div>
         <a href="/ir/whatsapp?origem=especialista" target="_blank" rel="noopener" class="btn btn--whatsapp" id="contato">
           Quero avaliar meu caso agora
         </a>
+      </div>
+    </section>
+
+    <!-- ===== OFERTAS — clareza de escopo (sem preços / sem garantia) ===== -->
+    <section class="offers" id="atuacao" aria-labelledby="offers-title">
+      <div class="container">
+        <header class="offers__header">
+          <h2 id="offers-title">Como podemos atuar no seu caso</h2>
+          <p class="offers__intro">
+            Escopos orientativos de Direito Digital para Instagram, WhatsApp, Facebook e TikTok.
+            Sem promessa de resultado — cada situação é analisada individualmente.
+          </p>
+        </header>
+
+        <div class="offers__grid">
+
+          <article class="offer-card">
+            <p class="offer-card__label">Essencial</p>
+            <h3 class="offer-card__title">Diagnóstico do caso</h3>
+            <ul class="offer-card__list">
+              <li>Leitura inicial do bloqueio, banimento ou invasão</li>
+              <li>Identificação da plataforma e dos pontos críticos</li>
+              <li>Orientação sobre próximos passos cabíveis</li>
+            </ul>
+            <a href="/ir/whatsapp?origem=plano_diagnostico" target="_blank" rel="noopener" class="btn btn--ghost offer-card__cta" id="cta-diagnostico">
+              Pedir diagnóstico no WhatsApp
+            </a>
+          </article>
+
+          <article class="offer-card offer-card--featured">
+            <p class="offer-card__badge">Recomendado</p>
+            <p class="offer-card__label">Estratégico</p>
+            <h3 class="offer-card__title">Atuação estratégica</h3>
+            <ul class="offer-card__list">
+              <li>Estratégia jurídica alinhada ao seu perfil digital</li>
+              <li>Medidas adequadas, inclusive liminar quando cabível</li>
+              <li>Foco em restabelecer o acesso com segurança</li>
+            </ul>
+            <a href="/ir/whatsapp?origem=plano_atuacao" target="_blank" rel="noopener" class="btn btn--whatsapp offer-card__cta" id="cta-atuacao">
+              Quero atuação estratégica
+            </a>
+          </article>
+
+          <article class="offer-card">
+            <p class="offer-card__label">Completo</p>
+            <h3 class="offer-card__title">Acompanhamento completo</h3>
+            <ul class="offer-card__list">
+              <li>Acompanhamento contínuo das tratativas e prazos</li>
+              <li>Atualizações claras sobre o andamento do caso</li>
+              <li>Suporte até a conclusão possível do processo</li>
+            </ul>
+            <a href="/ir/whatsapp?origem=plano_acompanhamento" target="_blank" rel="noopener" class="btn btn--ghost offer-card__cta" id="cta-acompanhamento">
+              Falar sobre acompanhamento
+            </a>
+          </article>
+
+        </div>
       </div>
     </section>
 
@@ -331,7 +421,7 @@
             </div>
             <div class="terminal__body">
               <div class="terminal__output" id="terminal-output" aria-hidden="true"></div>
-              <span class="terminal__cursor">█</span>
+              <span class="terminal__cursor" aria-hidden="true">█</span>
             </div>
           </div>
         </div>
@@ -347,12 +437,13 @@
         <div class="logo">Wagner Neri <span>| Direito Digital</span></div>
         <p>Wagner Robson Neri de Sousa</p>
         <p class="footer__affiliation">Integrante do escritório do Adv. Dr. Ricardo Nery</p>
+        <p><a href="https://ricardoneryadvocaciabr.com.br/" target="_blank" rel="noopener noreferrer">Site do escritório</a></p>
       </div>
       <div class="footer__col">
         <h4>Contato</h4>
-        <p>📞 (86) 9 8864-0341</p>
-        <p>✉️ wagnerneriadvocacia@gmail.com</p>
-        <p>📍 Rua José Sales Costa, 317 — CEP: 64003-760</p>
+        <p>Telefone: (86) 9 8864-0341</p>
+        <p>E-mail: wagnerneriadvocacia@gmail.com</p>
+        <p>Endereço: Rua José Sales Costa, 317 — CEP: 64003-760</p>
         <p>Atendimento em todo o Brasil (remoto)</p>
       </div>
       <div class="footer__col">
@@ -374,7 +465,7 @@
   <div class="modal" id="privacy-modal" aria-hidden="true">
     <div class="modal__overlay" data-close-modal></div>
     <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
-      <button class="modal__close" data-close-modal aria-label="Fechar">×</button>
+      <button type="button" class="modal__close" data-close-modal aria-label="Fechar política de privacidade">×</button>
       <h3 id="privacy-title">Política de Privacidade</h3>
       <p>Este site coleta apenas os dados necessários para viabilizar o contato inicial (nome,
         telefone e/ou mensagem enviada via WhatsApp). Parâmetros de campanha (UTM / IDs de
@@ -394,6 +485,6 @@
     </svg>
   </a>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8" defer></script>
 </body>
 </html>
