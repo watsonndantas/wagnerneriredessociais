@@ -1,6 +1,6 @@
 /* =========================================================
    Wagner Neri — Recuperação de Contas de Redes Sociais
-   Landing page — conceito "Diagnóstico Digital" (dark/terminal)
+   Landing page — conceito "Diagnóstico Digital"
    Fontes do sistema (sem requisições externas) → leve e rápida.
    ========================================================= */
 
@@ -166,17 +166,24 @@ img { max-width: 100%; display: block; height: auto; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.logo { font-weight: 700; font-size: 1.05rem; }
+.logo {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
 
-.logo span {
-  font-weight: 400;
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  display: block;
+.logo img {
+  height: 64px;
+  width: auto;
+  border-radius: 8px;
+}
+
+.logo--footer img {
+  height: 84px;
 }
 
 /* =====================================================
@@ -252,7 +259,7 @@ img { max-width: 100%; display: block; height: auto; }
   font-size: 0.85rem;
 }
 
-/* ----- CTA stack (link-in-bio pattern, dark/terminal) ----- */
+/* ----- CTA stack (link-in-bio pattern) ----- */
 .cta-stack {
   display: flex;
   flex-direction: column;
@@ -303,67 +310,21 @@ img { max-width: 100%; display: block; height: auto; }
   opacity: 0.95;
 }
 
-/* ----- Terminal ----- */
-.terminal {
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
+.strategy__visual {
+  margin: 0;
+  min-width: 0;
+}
+
+.strategy__visual picture,
+.strategy__visual img {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-}
-
-.terminal__bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 16px;
-  background: var(--bg-alt);
-  border-bottom: 1px solid var(--border);
-}
-
-.terminal__dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.terminal__dot--red { background: #ff5f56; }
-.terminal__dot--yellow { background: #ffbd2e; }
-.terminal__dot--green { background: #27c93f; }
-
-.terminal__title {
-  margin-left: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.terminal__body {
-  padding: 24px;
-  min-height: 220px;
-  font-family: var(--font-mono);
-  font-size: 0.92rem;
-}
-
-.terminal__line {
-  color: var(--text);
-  margin-bottom: 8px;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-
-.terminal__hl--danger { color: var(--danger); font-weight: 700; }
-.terminal__hl--success { color: var(--green); font-weight: 700; }
-
-.terminal__cursor {
-  display: inline-block;
-  color: var(--green);
-  animation: blink 1s step-start infinite;
-}
-
-@keyframes blink {
-  50% { opacity: 0; }
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  background: var(--bg-panel);
+  object-fit: contain;
 }
 
 /* =====================================================
@@ -483,7 +444,7 @@ img { max-width: 100%; display: block; height: auto; }
 }
 
 /* =====================================================
-   ESTRATÉGIA — Opção B (processo) + terminal
+   ESTRATÉGIA — processo + visual
    ===================================================== */
 .strategy {
   padding: 64px 0;
@@ -524,10 +485,6 @@ img { max-width: 100%; display: block; height: auto; }
   hyphens: auto;
 }
 
-.strategy__terminal {
-  margin: 0;
-  min-width: 0;
-}
 
 /* =====================================================
    ESPECIALISTA — barra compacta
@@ -751,7 +708,6 @@ img { max-width: 100%; display: block; height: auto; }
 /* ===== Reduced motion ===== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .terminal__cursor { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .cta-stack__btn,
   .btn { transition: none; }
@@ -782,7 +738,7 @@ img { max-width: 100%; display: block; height: auto; }
     gap: 28px;
   }
 
-  .strategy__terminal { order: 2; }
+  .strategy__visual { order: 2; }
   .strategy__copy { order: 1; }
 
   .specialist__inner {
@@ -799,10 +755,14 @@ img { max-width: 100%; display: block; height: auto; }
   .specialist__contact { justify-content: center; }
 
   .footer__inner { grid-template-columns: 1fr; text-align: center; }
+
+  .footer__col .logo { justify-content: center; }
 }
 
 @media (max-width: 520px) {
   .header__cta { display: none; }
+  .logo img { height: 48px; }
+  .logo--footer img { height: 72px; }
   .hero { padding: 32px 0 40px; }
   .hero__title { font-size: 1.65rem; }
   .strategy { padding: 48px 0; }

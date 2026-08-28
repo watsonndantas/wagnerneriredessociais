@@ -8,84 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* -----------------------------------------------------
-     1) TERMINAL DE DIAGNÓSTICO — efeito de digitação
-     ----------------------------------------------------- */
-  const terminalOutput = document.getElementById('terminal-output');
-
-  if (terminalOutput) {
-    const LINES = [
-      '$ verificar --conta',
-      'Plataforma: Instagram / WhatsApp / Facebook / TikTok',
-      'Status: SUSPENSA ⚠',
-      'Diagnóstico: bloqueio sem contraditório',
-      'Ação recomendada: medida judicial (liminar)',
-      '$ iniciar_recuperacao.sh',
-      'Status: RECUPERADA ✔',
-      'Aguardando seu contato…'
-    ];
-
-    const highlight = (el) => {
-      el.innerHTML = el.textContent
-        .replace(/SUSPENSA/g, '<span class="terminal__hl--danger">SUSPENSA</span>')
-        .replace(/RECUPERADA/g, '<span class="terminal__hl--success">RECUPERADA</span>')
-        .replace(/liminar/gi, '<span class="terminal__hl--success">liminar</span>');
-    };
-
-    const typeLine = (text, el, onDone) => {
-      let i = 0;
-      const id = setInterval(() => {
-        el.textContent = text.slice(0, i + 1);
-        i += 1;
-        if (i >= text.length) {
-          clearInterval(id);
-          onDone();
-        }
-      }, 26);
-    };
-
-    const renderInstant = () => {
-      terminalOutput.innerHTML = '';
-      LINES.forEach((line) => {
-        const div = document.createElement('div');
-        div.className = 'terminal__line';
-        div.textContent = line;
-        terminalOutput.appendChild(div);
-        highlight(div);
-      });
-    };
-
-    if (prefersReducedMotion) {
-      renderInstant();
-    } else {
-      let lineIndex = 0;
-
-      const nextLine = () => {
-        if (lineIndex >= LINES.length) {
-          window.setTimeout(() => {
-            terminalOutput.innerHTML = '';
-            lineIndex = 0;
-            nextLine();
-          }, 2600);
-          return;
-        }
-
-        const div = document.createElement('div');
-        div.className = 'terminal__line';
-        terminalOutput.appendChild(div);
-
-        typeLine(LINES[lineIndex], div, () => {
-          highlight(div);
-          lineIndex += 1;
-          window.setTimeout(nextLine, 420);
-        });
-      };
-
-      nextLine();
-    }
-  }
-
-  /* -----------------------------------------------------
-     2) BOTÃO FLUTUANTE DO WHATSAPP — animação de "pulo"
+     1) BOTÃO FLUTUANTE DO WHATSAPP — animação de "pulo"
      ----------------------------------------------------- */
   const whatsappButton = document.getElementById('whatsapp-float');
 
@@ -104,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -----------------------------------------------------
-     3) MODAL — Política de Privacidade
+     2) MODAL — Política de Privacidade
      ----------------------------------------------------- */
   const privacyLink = document.getElementById('privacy-link');
   const privacyModal = document.getElementById('privacy-modal');
@@ -139,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* -----------------------------------------------------
-     4) SCROLL REVEAL — entrada sutil das seções
+     3) SCROLL REVEAL — entrada sutil das seções
      ----------------------------------------------------- */
   const revealTargets = document.querySelectorAll(
     '.hero__content, .hero__visual, .strategy__inner, .specialist__inner, .offers__grid'
@@ -164,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -----------------------------------------------------
-     5) ATRIBUIÇÃO DE CAMPANHA (UTM + clids) — tráfego pago
+     4) ATRIBUIÇÃO DE CAMPANHA (UTM + clids) — tráfego pago
      ----------------------------------------------------- */
   const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
   const CLICK_ID_KEYS = ['gclid', 'gbraid', 'wbraid', 'fbclid'];
@@ -254,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* -----------------------------------------------------
-     6) RASTREAMENTO DE CONVERSÃO — GA4 + Meta + Google Ads
+     5) RASTREAMENTO DE CONVERSÃO — GA4 + Meta + Google Ads
      Dispara no clique, ANTES do redirect /ir/whatsapp.
      Atribuição sanitizada vai na query do backend (sufixo
      da mensagem WhatsApp é montado no servidor).
