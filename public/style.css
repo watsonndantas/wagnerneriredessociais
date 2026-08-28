@@ -26,6 +26,7 @@
   --radius: 14px;
   --max-width: 1080px;
   --focus-ring: 0 0 0 3px rgba(55, 224, 255, 0.55);
+  --logo-width: 12.6rem;
 }
 
 * { box-sizing: border-box; }
@@ -174,16 +175,14 @@ img { max-width: 100%; display: block; height: auto; }
   display: flex;
   align-items: center;
   line-height: 0;
+  width: var(--logo-width);
+  max-width: 100%;
 }
 
 .logo img {
-  height: 64px;
-  width: auto;
+  width: 100%;
+  height: auto;
   border-radius: 8px;
-}
-
-.logo--footer img {
-  height: 84px;
 }
 
 /* =====================================================
@@ -586,10 +585,11 @@ img { max-width: 100%; display: block; height: auto; }
 
 .footer__col p { margin-bottom: 8px; font-size: 0.9rem; }
 
-.footer__affiliation {
-  color: var(--green);
-  font-size: 0.82rem;
-  font-weight: 600;
+.footer__name {
+  width: var(--logo-width);
+  max-width: 100%;
+  margin: 10px 0 0;
+  white-space: nowrap;
 }
 
 .footer__col a {
@@ -761,8 +761,8 @@ img { max-width: 100%; display: block; height: auto; }
 
 @media (max-width: 520px) {
   .header__cta { display: none; }
-  .logo img { height: 48px; }
-  .logo--footer img { height: 72px; }
+  :root { --logo-width: min(12.6rem, calc(100vw - 48px)); }
+  .footer__name { white-space: normal; }
   .hero { padding: 32px 0 40px; }
   .hero__title { font-size: 1.65rem; }
   .strategy { padding: 48px 0; }
