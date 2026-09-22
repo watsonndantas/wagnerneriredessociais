@@ -38,6 +38,13 @@ ALLOWED_ORIGENS = frozenset({
     "plano_diagnostico",
     "plano_atuacao",
     "plano_acompanhamento",
+    "pg_instagram",
+    "pg_whatsapp",
+    "pg_facebook",
+    "pg_tiktok",
+    "pg_hackeada",
+    "pg_teresina",
+    "blog",
 })
 
 ATTR_KEYS = (
@@ -79,6 +86,13 @@ MESSAGES = {
         "Olá! Quero saber sobre o acompanhamento completo do meu caso de "
         "recuperação de conta em rede social."
     ),
+    "pg_instagram": "Olá! Meu Instagram foi banido/suspenso e preciso de ajuda para recuperar.",
+    "pg_whatsapp": "Olá! Meu WhatsApp foi banido e preciso de ajuda para recuperar o número.",
+    "pg_facebook": "Olá! Meu Facebook foi suspenso/desativado e preciso de ajuda para recuperar.",
+    "pg_tiktok": "Olá! Meu TikTok foi banido/suspenso e preciso de ajuda para recuperar.",
+    "pg_hackeada": "Olá! Minha conta foi hackeada e preciso de ajuda urgente para recuperar.",
+    "pg_teresina": "Olá! Sou de Teresina e preciso de ajuda para recuperar minha conta de rede social.",
+    "blog": "Olá! Li o blog e gostaria de uma análise do meu caso de recuperação de conta.",
 }
 DEFAULT_MESSAGE = "Olá! Preciso de ajuda para recuperar minha conta de rede social."
 
@@ -174,6 +188,8 @@ def sitemap():
 def static_files(filename):
     """Serve style.css, script.js, img/*, etc. Usado apenas em desenvolvimento
     local — na Vercel, `public/**` é servido direto pela CDN."""
+    if (PUBLIC_DIR / filename.rstrip("/")).is_dir():
+        filename = filename.rstrip("/") + "/index.html"
     _safe_public_file(filename)
     return send_from_directory(PUBLIC_DIR, filename)
 
